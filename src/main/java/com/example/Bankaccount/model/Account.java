@@ -20,6 +20,9 @@ public class Account {
     private BigDecimal balance;
     private Type type;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private UserAccount userAccount;
 //    @OneToMany(mappedBy = "usdAccount", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    private List <Exchange> exchangesList = new ArrayList<>();
 

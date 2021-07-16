@@ -5,15 +5,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.security.auth.login.AccountNotFoundException;
-
 @ControllerAdvice
-public class AccountNotFoundErrorController {
+public class PageNotFoundErrorController {
 
     @ResponseBody
-    @ExceptionHandler({UserAccountNotFoundException.class, AccountNotFoundException.class})
+    @ExceptionHandler(PageNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(UserAccountNotFoundException e){
+    String userNotFoundHandler(PageNotFoundException e) {
         return e.getMessage();
     }
 }

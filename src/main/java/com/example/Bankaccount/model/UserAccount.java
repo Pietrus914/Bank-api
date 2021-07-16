@@ -1,11 +1,11 @@
 package com.example.Bankaccount.model;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +21,10 @@ public class UserAccount {
     private BigDecimal plnValue;
     private Integer age;
 
+    @OneToMany(targetEntity = Account.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "cp_fk", referencedColumnName = "id")
+    private List <Account> accountList = new ArrayList<>();
+
     public UserAccount() {
     }
 
@@ -31,6 +35,15 @@ public class UserAccount {
         this.personalId = personalId;
         this.plnValue = plnValue;
         this.age = age;
+        this.accountList = Collections.emptyList();
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 
     public Long getId() {

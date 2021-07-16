@@ -1,9 +1,11 @@
 package com.example.Bankaccount.controller;
 
 
+import com.example.Bankaccount.model.Account;
 import com.example.Bankaccount.model.UserAccount;
+import com.example.Bankaccount.repository.AccountRepository;
 import com.example.Bankaccount.repository.UserAccountRepository;
-import com.example.Bankaccount.util.exception.UserAccountNotFoundException;
+import com.example.Bankaccount.util.exception.PageNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +14,11 @@ import java.util.List;
 public class UserAccountController {
 
     private final UserAccountRepository userAccountRepository;
+    private AccountRepository accountRepository;
 
-    public UserAccountController(UserAccountRepository userAccountRepository) {
+    public UserAccountController(UserAccountRepository userAccountRepository, AccountRepository accountRepository) {
         this.userAccountRepository = userAccountRepository;
+        this.accountRepository = accountRepository;
     }
 
     @GetMapping("/users")
@@ -31,7 +35,7 @@ public class UserAccountController {
     @GetMapping("/users/{id}")
     UserAccount singleUserAccount(@PathVariable Long id) {
         return userAccountRepository.findById(id)
-                .orElseThrow(() -> new UserAccountNotFoundException(id));
+                .orElseThrow(() -> new PageNotFoundException(id));
     }
 
 
