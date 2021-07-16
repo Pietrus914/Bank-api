@@ -36,7 +36,7 @@ public class UserAccountController {
 
 
     @PutMapping("/users/{id}")
-    UserAccount replaceEmployee(@RequestBody UserAccount newUserAccount, @PathVariable Long id) {
+    UserAccount replaceUserAccount (@RequestBody UserAccount newUserAccount, @PathVariable Long id) {
 
         return userAccountRepository.findById(id)
                 .map(userAccount -> {
