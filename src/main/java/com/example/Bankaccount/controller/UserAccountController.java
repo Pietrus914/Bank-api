@@ -18,19 +18,20 @@ public class UserAccountController {
     }
 
     @GetMapping("/users")
-    List<UserAccount> all(){
+    List<UserAccount> all() {
         return userAccountRepository.findAll();
     }
 
     @PostMapping("/users")
-    UserAccount newUserAccount(@RequestBody UserAccount newUserAccount){
+    UserAccount newUserAccount(@RequestBody UserAccount newUserAccount) {
         return userAccountRepository.save(newUserAccount);
     }
 
+
     @GetMapping("/users/{id}")
-    UserAccount one(@PathVariable Long id){
+    UserAccount singleUserAccount(@PathVariable Long id) {
         return userAccountRepository.findById(id)
-        .orElseThrow(() -> new UserAccountNotFoundException(id));
+                .orElseThrow(() -> new UserAccountNotFoundException(id));
     }
 
 
