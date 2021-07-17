@@ -2,7 +2,6 @@ package com.example.Bankaccount.controller;
 
 
 import com.example.Bankaccount.model.UserAccount;
-import com.example.Bankaccount.repository.AccountRepository;
 import com.example.Bankaccount.repository.UserAccountRepository;
 import com.example.Bankaccount.service.UserAccountServiceInterface;
 import com.example.Bankaccount.util.exception.PageNotFoundException;
@@ -10,6 +9,7 @@ import com.example.Bankaccount.util.exception.UserToYoungException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserAccountController {
@@ -41,6 +41,15 @@ public class UserAccountController {
     UserAccount singleUserAccount(@PathVariable Long id) {
         return userAccountRepository.findById(id)
                 .orElseThrow(() -> new PageNotFoundException(id));
+    }
+
+
+    @GetMapping("/personal/{personalId}")
+    Optional<UserAccount> singleUserAccountByPersonalId(@PathVariable Long personalId) {
+        Optional<UserAccount> userAccountByPersonalId = Optional.ofNullable(userAccountRepository.findByPersonalId(personalId));
+        userAccountByPersonalId.orElseThrow(() -> new PageNotFoundException(personalId));
+
+        return userAccountByPersonalId;
     }
 
 
