@@ -28,7 +28,7 @@ public class AccountController {
 
 
     @GetMapping("/account/{id}")
-    Account singleUsdAccount(@PathVariable Long id){
+    Account singleAccount(@PathVariable Long id){
         return accountRepository.findById(id)
                 .orElseThrow(() -> new PageNotFoundException(id));
     }

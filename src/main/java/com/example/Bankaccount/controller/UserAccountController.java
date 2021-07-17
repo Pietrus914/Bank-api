@@ -1,11 +1,13 @@
 package com.example.Bankaccount.controller;
 
 
-import com.example.Bankaccount.model.Account;
 import com.example.Bankaccount.model.UserAccount;
 import com.example.Bankaccount.repository.AccountRepository;
 import com.example.Bankaccount.repository.UserAccountRepository;
+import com.example.Bankaccount.service.UserAccountServiceInterface;
 import com.example.Bankaccount.util.exception.PageNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,22 +16,38 @@ import java.util.List;
 public class UserAccountController {
 
     private final UserAccountRepository userAccountRepository;
+    @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private UserAccountServiceInterface userAccountServiceInterface;
 
-    public UserAccountController(UserAccountRepository userAccountRepository, AccountRepository accountRepository) {
+    public UserAccountController(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
-        this.accountRepository = accountRepository;
     }
+
 
     @GetMapping("/users")
     List<UserAccount> all() {
         return userAccountRepository.findAll();
     }
 
-    @PostMapping("/users")
+        @PostMapping("/users")
     UserAccount newUserAccount(@RequestBody UserAccount newUserAccount) {
         return userAccountRepository.save(newUserAccount);
     }
+//    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+//    public String signupPost(@ModelAttribute("userAccount") UserAccount userAccount, Model model) {
+//        if (userAccountServiceInterface.checkUserAccountExist(userAccount.getPersonalId())) {
+//            if (userAccountServiceInterface.checkPersonalIdExist(userAccount.getPersonalId())) {
+//                model.addAttribute("PersonalIdExists", true);
+//            }
+//            return "signup";
+//
+//        } else {
+//            userAccountServiceInterface.createUserAccount(userAccount);
+//            return "redirect:/users";
+//        }
+//    }
 
 
     @GetMapping("/users/{id}")
@@ -40,7 +58,7 @@ public class UserAccountController {
 
 
     @PutMapping("/users/{id}")
-    UserAccount replaceUserAccount (@RequestBody UserAccount newUserAccount, @PathVariable Long id) {
+    UserAccount replaceUserAccount(@RequestBody UserAccount newUserAccount, @PathVariable Long id) {
 
         return userAccountRepository.findById(id)
                 .map(userAccount -> {

@@ -21,29 +21,35 @@ public class UserAccount {
     private BigDecimal plnValue;
     private Integer age;
 
-    @OneToMany(targetEntity = Account.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cp_fk", referencedColumnName = "id")
-    private List <Account> accountList = new ArrayList<>();
+    @OneToOne(targetEntity = Account.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "pln_fk", referencedColumnName = "id")
+    private Account account;
+
+//    @OneToOne(targetEntity = Account.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "usd_fk", referencedColumnName = "id")
+//    private Account account2;
 
     public UserAccount() {
     }
 
-    public UserAccount(Long id, String name, String lastName, Long personalId, BigDecimal plnValue, Integer age) {
+    public UserAccount(Long id, String name, String lastName, Long personalId, BigDecimal plnValue, Integer age, Account account) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.personalId = personalId;
         this.plnValue = plnValue;
         this.age = age;
-        this.accountList = Collections.emptyList();
+        this.account = account;
+//        this.account = account2;
     }
 
-    public List<Account> getAccountList() {
-        return accountList;
+
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Long getId() {
