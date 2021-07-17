@@ -33,21 +33,8 @@ public class UserAccountController {
 
         @PostMapping("/users")
     UserAccount newUserAccount(@RequestBody UserAccount newUserAccount) {
-        return userAccountRepository.save(newUserAccount);
+        return userAccountServiceInterface.createUserAccount(newUserAccount);
     }
-//    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-//    public String signupPost(@ModelAttribute("userAccount") UserAccount userAccount, Model model) {
-//        if (userAccountServiceInterface.checkUserAccountExist(userAccount.getPersonalId())) {
-//            if (userAccountServiceInterface.checkPersonalIdExist(userAccount.getPersonalId())) {
-//                model.addAttribute("PersonalIdExists", true);
-//            }
-//            return "signup";
-//
-//        } else {
-//            userAccountServiceInterface.createUserAccount(userAccount);
-//            return "redirect:/users";
-//        }
-//    }
 
 
     @GetMapping("/users/{id}")

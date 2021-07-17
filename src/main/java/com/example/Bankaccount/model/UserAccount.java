@@ -40,7 +40,7 @@ public class UserAccount {
         this.plnValue = plnValue;
         this.age = age;
         this.account = account;
-//        this.account = account2;
+
     }
 
 
@@ -113,12 +113,13 @@ public class UserAccount {
                 && Objects.equals(this.lastName, userAccount.lastName)
                 && Objects.equals(this.personalId, userAccount.personalId)
                 && Objects.equals(this.plnValue, userAccount.plnValue)
-                && Objects.equals(this.age, userAccount.age);
+                && Objects.equals(this.age, userAccount.age)
+                && Objects.equals(this.account, userAccount.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.lastName, this.personalId, this.plnValue, this.age);
+        return Objects.hash(this.id, this.name, this.lastName, this.personalId, this.plnValue, this.age, this.account);
     }
 
     @Override

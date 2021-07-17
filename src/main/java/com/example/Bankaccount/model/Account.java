@@ -61,14 +61,6 @@ public class Account {
         this.balance = balance;
     }
 
-//    public List<Exchange> getExchangesList() {
-//        return exchangesList;
-//    }
-//
-//    public void setExchangesList(List<Exchange> exchangesList) {
-//        this.exchangesList = exchangesList;
-//    }
-
     public Type getType() {
         return type;
     }
@@ -83,7 +75,7 @@ public class Account {
                 "id=" + id +
                 ", accountNumber=" + accountNumber +
                 ", balance=" + balance +
-//                ", transactionList=" + exchangesList +
+                ", type=" + type +
                 '}';
     }
 }

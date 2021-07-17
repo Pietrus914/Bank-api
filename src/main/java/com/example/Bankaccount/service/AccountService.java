@@ -26,11 +26,12 @@ public class AccountService implements AccountServiceInterface {
     @Override
     public Account createAccount( ) {
         Account account = new Account();
-        account.setId(userAccount.getId());
         account.setAccountNumber(new Random().nextInt());
         account.setBalance(new BigDecimal("0.0"));
         account.setType(Type.PLN_ACCOUNT);
         accountRepository.save(account);
+
+        System.out.println(account);
 
         return accountRepository.findByAccountNumber(account.getAccountNumber());
     }
