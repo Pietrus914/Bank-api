@@ -21,14 +21,12 @@ public class LoadDatabase {
 
         return args -> {
             log.info("Preloading " + userAccountRepository.save(new UserAccount
-                    (1L,"Jan", "Kowalski", 1235L, new BigDecimal("10000.00"), 25,
-                            new Account(1L,100, new BigDecimal("1000.00"), Type.PLN_ACCOUNT))));
-//                            , new Account(2L,200, new BigDecimal("0.00"), Type.USD_ACCOUNT))));
+                    (1L,"Jan", "Kowalski", 1235L, 555555, new BigDecimal("10000.00"), 25,
+                            new Account(1L,100, new BigDecimal("1000.00"), Type.USD_ACCOUNT))));
+                           ;
             log.info("Preloading " + userAccountRepository.save(new UserAccount
-                    (2L, "Adam", "Nowak", 4567L, new BigDecimal("12000.00"), 35,
-                            new Account(3L,300, new BigDecimal("1200.00"), Type.PLN_ACCOUNT))));
-//                           , new Account(4L,400, new BigDecimal("0.00"), Type.USD_ACCOUNT))));
-
+                    (2L, "Adam", "Nowak", 4567L, 666666, new BigDecimal("12000.00"), 35,
+                            new Account(2L,300, new BigDecimal("1200.00"), Type.USD_ACCOUNT))));
         };
     }
 }

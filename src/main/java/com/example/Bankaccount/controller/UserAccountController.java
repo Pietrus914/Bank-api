@@ -6,20 +6,20 @@ import com.example.Bankaccount.repository.AccountRepository;
 import com.example.Bankaccount.repository.UserAccountRepository;
 import com.example.Bankaccount.service.UserAccountServiceInterface;
 import com.example.Bankaccount.util.exception.PageNotFoundException;
+import com.example.Bankaccount.util.exception.UserToYoungException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 public class UserAccountController {
 
     private final UserAccountRepository userAccountRepository;
-    @Autowired
-    private AccountRepository accountRepository;
+
+
     @Autowired
     private UserAccountServiceInterface userAccountServiceInterface;
+
 
     public UserAccountController(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
@@ -52,8 +52,12 @@ public class UserAccountController {
                     userAccount.setName(newUserAccount.getName());
                     userAccount.setLastName(newUserAccount.getLastName());
                     userAccount.setPersonalId(newUserAccount.getPersonalId());
+                    userAccount.setPlnAccountNumber(newUserAccount.getPlnAccountNumber());
                     userAccount.setPlnValue(newUserAccount.getPlnValue());
                     userAccount.setAge(newUserAccount.getAge());
+                    if(newUserAccount.getAge() < 18){
+                        throw new UserToYoungException(id);
+                    }
                     return userAccountRepository.save(userAccount);
                 })
                 .orElseGet(() -> {

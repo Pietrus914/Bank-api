@@ -40,20 +40,22 @@ public class UserAccountService implements UserAccountServiceInterface {
     public UserAccount createUserAccount(UserAccount userAccount) {
 
         UserAccount newUserAccount = userAccountRepository.findByPersonalId(userAccount.getPersonalId());
+
         System.out.println(userAccountRepository.findByPersonalId(userAccount.getPersonalId()));
         try {
         if (newUserAccount != null) {
             logger.info("UserAccount with personalId {} already exist.", userAccount.getPersonalId());
 
         } else {
-            logger.info("lipa.");
+
             UserAccount newUser = new UserAccount();
             newUser.setName("");
             newUser.setLastName("");
             newUser.setPersonalId(0000000l);
             newUser.setPlnValue(new BigDecimal(0.0));
-            newUser.setAge(0);
+            newUser.setAge(18);
 
+            newUser.setAccount(accountServiceInterface.createAccount());
             newUser.setAccount(accountServiceInterface.createAccount());
             userAccountRepository.save(newUser);
 

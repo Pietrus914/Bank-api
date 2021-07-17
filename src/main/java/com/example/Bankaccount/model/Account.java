@@ -4,9 +4,6 @@ import com.example.Bankaccount.config.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table
@@ -20,12 +17,6 @@ public class Account {
     private BigDecimal balance;
     private Type type;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private UserAccount userAccount;
-//    @OneToMany(mappedBy = "usdAccount", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List <Exchange> exchangesList = new ArrayList<>();
-
     public Account() {
     }
 
@@ -33,7 +24,6 @@ public class Account {
         this.id = id;
         this.accountNumber = accountNumber;
         this.balance = balance;
-//        this.exchangesList = Collections.emptyList();
         this.type = type;
     }
 

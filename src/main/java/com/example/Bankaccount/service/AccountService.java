@@ -15,12 +15,9 @@ public class AccountService implements AccountServiceInterface {
 
     @Autowired
     private AccountRepository accountRepository;
-    private UserAccountServiceInterface userAccountServiceInterface;
-    private UserAccount userAccount;
 
     public AccountService(AccountRepository accountRepository, UserAccountServiceInterface userAccountServiceInterface) {
         this.accountRepository = accountRepository;
-        this.userAccountServiceInterface = userAccountServiceInterface;
     }
 
     @Override
@@ -28,7 +25,7 @@ public class AccountService implements AccountServiceInterface {
         Account account = new Account();
         account.setAccountNumber(new Random().nextInt());
         account.setBalance(new BigDecimal("0.0"));
-        account.setType(Type.PLN_ACCOUNT);
+        account.setType(Type.USD_ACCOUNT);
         accountRepository.save(account);
 
         System.out.println(account);

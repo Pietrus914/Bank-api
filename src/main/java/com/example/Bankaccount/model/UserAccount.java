@@ -1,11 +1,7 @@
 package com.example.Bankaccount.model;
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +14,7 @@ public class UserAccount {
     private String name;
     private String lastName;
     private Long personalId;
+    private Integer plnAccountNumber;
     private BigDecimal plnValue;
     private Integer age;
 
@@ -25,22 +22,18 @@ public class UserAccount {
     @JoinColumn(name = "pln_fk", referencedColumnName = "id")
     private Account account;
 
-//    @OneToOne(targetEntity = Account.class, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "usd_fk", referencedColumnName = "id")
-//    private Account account2;
-
     public UserAccount() {
     }
 
-    public UserAccount(Long id, String name, String lastName, Long personalId, BigDecimal plnValue, Integer age, Account account) {
+    public UserAccount(Long id, String name, String lastName, Long personalId, Integer plnAccountNumber, BigDecimal plnValue, Integer age, Account account) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.personalId = personalId;
+        this.plnAccountNumber = plnAccountNumber;
         this.plnValue = plnValue;
         this.age = age;
         this.account = account;
-
     }
 
 
@@ -100,6 +93,14 @@ public class UserAccount {
         this.age = age;
     }
 
+    public Integer getPlnAccountNumber() {
+        return plnAccountNumber;
+    }
+
+    public void setPlnAccountNumber(Integer plnAccountNumber) {
+        this.plnAccountNumber = plnAccountNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
 
@@ -112,6 +113,7 @@ public class UserAccount {
                 && Objects.equals(this.name, userAccount.name)
                 && Objects.equals(this.lastName, userAccount.lastName)
                 && Objects.equals(this.personalId, userAccount.personalId)
+                && Objects.equals(this.plnAccountNumber, userAccount.plnAccountNumber)
                 && Objects.equals(this.plnValue, userAccount.plnValue)
                 && Objects.equals(this.age, userAccount.age)
                 && Objects.equals(this.account, userAccount.account);
@@ -119,12 +121,13 @@ public class UserAccount {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.lastName, this.personalId, this.plnValue, this.age, this.account);
+        return Objects.hash(this.id, this.name, this.lastName, this.personalId, this.plnAccountNumber, this.plnValue, this.age, this.account);
     }
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + this.id + ", name='" + this.name + '\'' + ", last name='" + this.lastName + '\'' +
-                ", personal ID='" + this.personalId + '\'' + ", pln value=" + this.plnValue + '\'' + ", age=" + this.age + '}';
+        return "User{" + "id=" + this.id + ", name='" + this.name + '\'' + ", last name='" + this.lastName + '\'' +
+                ", personal ID='" + this.personalId + '\'' + ", pln account number=" + this.plnAccountNumber + '\''
+                + ", pln value=" + this.plnValue + '\'' + ", age=" + this.age + '}';
     }
 }
