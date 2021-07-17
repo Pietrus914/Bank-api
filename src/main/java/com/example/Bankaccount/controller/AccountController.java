@@ -2,7 +2,7 @@ package com.example.Bankaccount.controller;
 
 import com.example.Bankaccount.model.Account;
 import com.example.Bankaccount.repository.AccountRepository;
-import com.example.Bankaccount.util.exception.PageNotFoundException;
+import com.example.Bankaccount.exception.PageNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

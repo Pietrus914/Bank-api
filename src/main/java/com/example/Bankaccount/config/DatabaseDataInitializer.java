@@ -1,6 +1,7 @@
 package com.example.Bankaccount.config;
 
 import com.example.Bankaccount.model.Account;
+import com.example.Bankaccount.model.Type;
 import com.example.Bankaccount.model.UserAccount;
 import com.example.Bankaccount.repository.UserAccountRepository;
 import org.slf4j.Logger;
@@ -12,9 +13,9 @@ import java.math.BigDecimal;
 
 
 @Configuration
-public class LoadDatabase {
+public class DatabaseDataInitializer {
 
-    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    private static final Logger log = LoggerFactory.getLogger(DatabaseDataInitializer.class);
 
     @Bean
     CommandLineRunner initDatabase(UserAccountRepository userAccountRepository) {

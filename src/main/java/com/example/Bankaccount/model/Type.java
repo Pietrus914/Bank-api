@@ -1,4 +1,4 @@
-package com.example.Bankaccount.config;
+package com.example.Bankaccount.model;
 
 public enum Type {
     USD_ACCOUNT,

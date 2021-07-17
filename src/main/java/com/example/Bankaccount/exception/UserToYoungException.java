@@ -1,4 +1,4 @@
-package com.example.Bankaccount.util.exception;
+package com.example.Bankaccount.exception;
 
 public class UserToYoungException extends  RuntimeException{
 

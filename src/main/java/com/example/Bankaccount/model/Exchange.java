@@ -9,19 +9,19 @@ public class Exchange {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private double amount;
 
-//    @ManyToOne
-//    private Account account;
+    @OneToOne(targetEntity = Account.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "usd_fk", referencedColumnName = "id")
+    private Account account;
 
     public Exchange() {
     }
 
-    public Exchange(Long id, double amount, Account account) {
+    public Exchange(Long id, double amount) {
         this.id = id;
         this.amount = amount;
-//        this.account = account;
+
     }
 
 
@@ -41,13 +41,6 @@ public class Exchange {
         this.amount = amount;
     }
 
-//    public Account getAccount() {
-//        return account;
-//    }
-//
-//    public void setAccount(Account account) {
-//        this.account = account;
-//    }
 
     @Override
     public String toString() {

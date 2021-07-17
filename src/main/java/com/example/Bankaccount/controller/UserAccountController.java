@@ -3,26 +3,25 @@ package com.example.Bankaccount.controller;
 
 import com.example.Bankaccount.model.UserAccount;
 import com.example.Bankaccount.repository.UserAccountRepository;
-import com.example.Bankaccount.service.UserAccountServiceInterface;
-import com.example.Bankaccount.util.exception.PageNotFoundException;
-import com.example.Bankaccount.util.exception.UserToYoungException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.Bankaccount.service.UserAccountService;
+import com.example.Bankaccount.exception.PageNotFoundException;
+import com.example.Bankaccount.exception.UserToYoungException;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class UserAccountController {
 
+
     private final UserAccountRepository userAccountRepository;
+    private UserAccountService userAccountService;
 
 
-    @Autowired
-    private UserAccountServiceInterface userAccountServiceInterface;
-
-
-    public UserAccountController(UserAccountRepository userAccountRepository) {
+    public UserAccountController(UserAccountRepository userAccountRepository, UserAccountService userAccountService) {
         this.userAccountRepository = userAccountRepository;
+        this.userAccountService = userAccountService;
     }
 
 
@@ -31,9 +30,10 @@ public class UserAccountController {
         return userAccountRepository.findAll();
     }
 
-        @PostMapping("/users")
+
+    @PostMapping("/users")
     UserAccount newUserAccount(@RequestBody UserAccount newUserAccount) {
-        return userAccountServiceInterface.createUserAccount(newUserAccount);
+        return userAccountService.createUserAccount(newUserAccount);
     }
 
 
@@ -64,7 +64,7 @@ public class UserAccountController {
                     userAccount.setPlnAccountNumber(newUserAccount.getPlnAccountNumber());
                     userAccount.setPlnValue(newUserAccount.getPlnValue());
                     userAccount.setAge(newUserAccount.getAge());
-                    if(newUserAccount.getAge() < 18){
+                    if (newUserAccount.getAge() < 18) {
                         throw new UserToYoungException(id);
                     }
                     return userAccountRepository.save(userAccount);
@@ -74,6 +74,7 @@ public class UserAccountController {
                     return userAccountRepository.save(newUserAccount);
                 });
     }
+
 
     @DeleteMapping("/users/{id}")
     void deleteUserAccount(@PathVariable Long id) {

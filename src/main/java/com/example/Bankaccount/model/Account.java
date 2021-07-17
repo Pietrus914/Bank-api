@@ -1,7 +1,5 @@
 package com.example.Bankaccount.model;
 
-import com.example.Bankaccount.config.Type;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -10,7 +8,7 @@ import java.math.BigDecimal;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer accountNumber;
