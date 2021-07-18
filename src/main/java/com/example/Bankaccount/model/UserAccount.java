@@ -1,9 +1,12 @@
 package com.example.Bankaccount.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Data
 @Entity
 public class UserAccount {
 
@@ -36,70 +39,6 @@ public class UserAccount {
         this.account = account;
     }
 
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Long getPersonalId() {
-        return personalId;
-    }
-
-    public void setPersonalId(Long personalId) {
-        this.personalId = personalId;
-    }
-
-    public BigDecimal getPlnValue() {
-        return plnValue;
-    }
-
-    public void setPlnValue(BigDecimal plnValue) {
-        this.plnValue = plnValue;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Integer getPlnAccountNumber() {
-        return plnAccountNumber;
-    }
-
-    public void setPlnAccountNumber(Integer plnAccountNumber) {
-        this.plnAccountNumber = plnAccountNumber;
-    }
 
     @Override
     public boolean equals(Object o) {

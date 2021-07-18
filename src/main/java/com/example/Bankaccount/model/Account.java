@@ -1,8 +1,11 @@
 package com.example.Bankaccount.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Data
 @Entity
 @Table
 public class Account {
@@ -25,37 +28,6 @@ public class Account {
         this.type = type;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(Integer accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal  balance) {
-        this.balance = balance;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
 
     @Override
     public String toString() {
