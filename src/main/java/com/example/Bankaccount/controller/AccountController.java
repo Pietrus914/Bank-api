@@ -26,7 +26,6 @@ public class AccountController {
         return accountRepository.save(newAccount);
     }
 
-
     @GetMapping("/account/{id}")
     Account singleAccount(@PathVariable Long id){
         return accountRepository.findById(id)

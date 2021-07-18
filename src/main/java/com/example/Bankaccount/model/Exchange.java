@@ -10,17 +10,15 @@ public class Exchange {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private double amount;
-
-    @OneToOne(targetEntity = Account.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "usd_fk", referencedColumnName = "id")
-    private Account account;
+    private Long accountId;
 
     public Exchange() {
     }
 
-    public Exchange(Long id, double amount) {
+    public Exchange(Long id, double amount, Long accountId) {
         this.id = id;
         this.amount = amount;
+        this.accountId = accountId;
 
     }
 
@@ -41,12 +39,40 @@ public class Exchange {
         this.amount = amount;
     }
 
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Exchange that = (Exchange) o;
+
+        if (amount != that.amount) return false;
+        if (!id.equals(that.id)) return false;
+        return accountId.equals(that.accountId);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + accountId.hashCode();
+        result = (int) (31 * result + amount);
+        return result;
+    }
 
     @Override
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
                 ", amount=" + amount +
+                ", accountId='" + accountId + '\'' +
                 '}';
     }
 }
