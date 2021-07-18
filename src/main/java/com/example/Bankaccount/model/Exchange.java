@@ -1,7 +1,10 @@
 package com.example.Bankaccount.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table
 public class Exchange {
@@ -19,33 +22,8 @@ public class Exchange {
         this.id = id;
         this.amount = amount;
         this.accountId = accountId;
-
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
 
     @Override
     public boolean equals(Object o) {

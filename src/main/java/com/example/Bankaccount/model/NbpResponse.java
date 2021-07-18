@@ -15,4 +15,5 @@ public class NbpResponse {
     @JsonProperty("rates")
     private JsonNode rates;
 
+
 }
