@@ -1,22 +1,18 @@
 package com.example.Bankaccount.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
-
-import javax.persistence.Entity;
-import java.util.List;
 
 
 @Data
 public class NbpResponse {
 
+    @JsonProperty("code")
     private String currency;
 
-
-    public NbpResponse(String currency) {
-        this.currency = currency;
-
-    }
-
+    @JsonProperty("rates")
+    private JsonNode rates;
 
 }

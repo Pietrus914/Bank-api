@@ -15,7 +15,7 @@ public class NbpService {
         this.client = client;
     }
 
-    public String getInfo(){
+    public NbpResponse getInfo(){
         return client.getNbpInfo();
     }
 }
