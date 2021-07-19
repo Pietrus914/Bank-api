@@ -1,6 +1,7 @@
 # bank-api
 
-REST Api 
+REST Api
+
 A banking application that allows you to create a user's main account in PLN and a sub-account in USD.
 
 
@@ -8,7 +9,7 @@ Functionality:
 - Adding a new user (name, surname, personal ID, main account balance, age)
 - Data validation
 - Data update
-- Connection to NBP Api to get cryptocurrency rates
+- Connection to NBP Api to get currency rates
 - Transfer of funds between accounts
 
 
