@@ -40,15 +40,20 @@ public class ExchangeServiceImp implements ExchangeService {
             if (userAccount.isPresent()){
                 exchangeRepository.save(exchange);
                 BigDecimal usdRate = nbpClient.getNbpInfo().getRates().get(0).getAsk();
-                userAccount.get().setPlnValue(userAccount.get().getPlnValue().subtract(BigDecimal.valueOf(exchange.getAmount())));
-                userAccountRepository.save(userAccount.get());
 
-                account.get().setBalance(account.get().getBalance().add(BigDecimal.valueOf(exchange.getAmount()).divide(usdRate, 2, RoundingMode.HALF_DOWN)));
-                accountRepository.save(account.get());
+                if (userAccount.get().getPlnValue().longValueExact() < exchange.getAmount()){
+                    log.info("Account balance is to low.");
+
+                } else{
+                    userAccount.get().setPlnValue(userAccount.get().getPlnValue().subtract(BigDecimal.valueOf(exchange.getAmount())));
+                    userAccountRepository.save(userAccount.get());
+                    account.get().setBalance(account.get().getBalance().add(BigDecimal.valueOf(exchange.getAmount()).divide(usdRate, 2, RoundingMode.HALF_DOWN)));
+                    accountRepository.save(account.get());
+                }
+
             } else {
                 log.info("UserAccount not exist.");
             }
-
 
         } catch (NullPointerException e) {
             System.out.print("Caught the NullPointerException");
@@ -67,11 +72,16 @@ public class ExchangeServiceImp implements ExchangeService {
                 exchangeRepository.save(exchange);
                 BigDecimal usdRate = nbpClient.getNbpInfo().getRates().get(0).getBid();
 
-                account.get().setBalance(account.get().getBalance().subtract(BigDecimal.valueOf(exchange.getAmount())));
-                accountRepository.save(account.get());
+                if (account.get().getBalance().longValueExact() < exchange.getAmount()){
+                    log.info("Account balance is to low.");
 
-                userAccount.get().setPlnValue(userAccount.get().getPlnValue().add(BigDecimal.valueOf(exchange.getAmount()).multiply(usdRate)));
-                userAccountRepository.save(userAccount.get());
+                } else {
+                    account.get().setBalance(account.get().getBalance().subtract(BigDecimal.valueOf(exchange.getAmount())));
+                    accountRepository.save(account.get());
+                    userAccount.get().setPlnValue(userAccount.get().getPlnValue().add(BigDecimal.valueOf(exchange.getAmount()).multiply(usdRate)));
+                    userAccountRepository.save(userAccount.get());
+                }
+
             }else {
                 log.info("UserAccount not exist.");
             }
