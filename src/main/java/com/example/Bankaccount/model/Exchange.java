@@ -36,14 +36,7 @@ public class Exchange {
         if (!id.equals(that.id)) return false;
         return accountId.equals(that.accountId);
     }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + accountId.hashCode();
-        result = (int) (31 * result + amount);
-        return result;
-    }
+    
 
     @Override
     public String toString() {
