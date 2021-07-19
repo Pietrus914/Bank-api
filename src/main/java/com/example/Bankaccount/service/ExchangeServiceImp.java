@@ -34,7 +34,7 @@ public class ExchangeServiceImp implements ExchangeService {
     }
 
     @Override
-    public Exchange transaction(Exchange exchange) {
+    public Exchange transactionPln(Exchange exchange) {
 
         try {
             Optional<UserAccount> userAccount = userAccountRepository.findById(exchange.getAccountId());
@@ -42,12 +42,39 @@ public class ExchangeServiceImp implements ExchangeService {
             if (userAccount.isPresent()){
                 exchangeRepository.save(exchange);
                 BigDecimal usdRate = nbpClient.getNbpInfo().getRates().get(0).getAsk();
-//                userAccount.get().setPlnValue(userAccount.get().getPlnValue().subtract(usdRate.multiply(BigDecimal.valueOf(exchange.getAmount()))));
                 userAccount.get().setPlnValue(userAccount.get().getPlnValue().subtract(BigDecimal.valueOf(exchange.getAmount())));
                 userAccountRepository.save(userAccount.get());
 
                 account.get().setBalance(account.get().getBalance().add(BigDecimal.valueOf(exchange.getAmount()).divide(usdRate, 2, RoundingMode.HALF_DOWN)));
                 accountRepository.save(account.get());
+
+            }
+
+
+        } catch (NullPointerException e) {
+            System.out.print("Caught the NullPointerException");
+
+        }
+        return exchange;
+    }
+
+    @Override
+    public Exchange transactionUsd(Exchange exchange) {
+
+        try {
+            Optional<UserAccount> userAccount = userAccountRepository.findById(exchange.getAccountId());
+            Optional<Account> account = accountRepository.findById(exchange.getAccountId());
+            if (userAccount.isPresent()){
+                exchangeRepository.save(exchange);
+                BigDecimal usdRate = nbpClient.getNbpInfo().getRates().get(0).getBid();
+
+                account.get().setBalance(account.get().getBalance().subtract(BigDecimal.valueOf(exchange.getAmount())));
+                accountRepository.save(account.get());
+
+                userAccount.get().setPlnValue(userAccount.get().getPlnValue().add(BigDecimal.valueOf(exchange.getAmount()).multiply(usdRate)));
+                userAccountRepository.save(userAccount.get());
+
+
 
             }
 

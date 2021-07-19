@@ -13,7 +13,7 @@ public class NbpClient {
 
     public NbpResponse getNbpInfo(){
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://api.nbp.pl/api/exchangerates/rates/c/usd/2016-04-04/?format=json";
+        String url = "http://api.nbp.pl/api/exchangerates/rates/c/usd/today/";
         ResponseEntity<NbpResponse> response = restTemplate.getForEntity(url, NbpResponse.class);
 
         log.info(response.getStatusCode().toString());

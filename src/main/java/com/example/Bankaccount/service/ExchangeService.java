@@ -5,5 +5,7 @@ import com.example.Bankaccount.model.UserAccount;
 
 public interface ExchangeService {
 
-    Exchange transaction(Exchange exchange);
+    Exchange transactionPln(Exchange exchange);
+    Exchange transactionUsd(Exchange exchange);
+
 }
