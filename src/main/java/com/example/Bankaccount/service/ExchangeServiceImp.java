@@ -7,14 +7,13 @@ import com.example.Bankaccount.model.UserAccount;
 import com.example.Bankaccount.repository.AccountRepository;
 import com.example.Bankaccount.repository.ExchangeRepository;
 import com.example.Bankaccount.repository.UserAccountRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class ExchangeServiceImp implements ExchangeService {
 
@@ -24,7 +23,6 @@ public class ExchangeServiceImp implements ExchangeService {
     private AccountRepository accountRepository;
     private NbpClient nbpClient;
 
-    private static final Logger logger = LoggerFactory.getLogger(ExchangeService.class);
 
     public ExchangeServiceImp(ExchangeRepository exchangeRepository, UserAccountRepository userAccountRepository, AccountRepository accountRepository, NbpClient nbpClient) {
         this.exchangeRepository = exchangeRepository;
@@ -47,7 +45,8 @@ public class ExchangeServiceImp implements ExchangeService {
 
                 account.get().setBalance(account.get().getBalance().add(BigDecimal.valueOf(exchange.getAmount()).divide(usdRate, 2, RoundingMode.HALF_DOWN)));
                 accountRepository.save(account.get());
-
+            } else {
+                log.info("UserAccount not exist.");
             }
 
 
@@ -73,11 +72,9 @@ public class ExchangeServiceImp implements ExchangeService {
 
                 userAccount.get().setPlnValue(userAccount.get().getPlnValue().add(BigDecimal.valueOf(exchange.getAmount()).multiply(usdRate)));
                 userAccountRepository.save(userAccount.get());
-
-
-
+            }else {
+                log.info("UserAccount not exist.");
             }
-
 
         } catch (NullPointerException e) {
             System.out.print("Caught the NullPointerException");

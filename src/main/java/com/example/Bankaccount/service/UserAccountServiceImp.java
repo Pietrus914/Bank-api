@@ -2,6 +2,7 @@ package com.example.Bankaccount.service;
 
 import com.example.Bankaccount.model.UserAccount;
 import com.example.Bankaccount.repository.UserAccountRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
-
+@Slf4j
 @Service
 public class UserAccountServiceImp implements UserAccountService {
 
@@ -18,8 +19,6 @@ public class UserAccountServiceImp implements UserAccountService {
 
     @Autowired
     private AccountService accountService;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserAccountService.class);
 
 
     public UserAccount findByPersonalId(Long personalId) {
@@ -44,7 +43,7 @@ public class UserAccountServiceImp implements UserAccountService {
         System.out.println(userAccountRepository.findByPersonalId(userAccount.getPersonalId()));
         try {
         if (newUserAccount != null) {
-            logger.info("UserAccount with personalId {} already exist.", userAccount.getPersonalId());
+            log.info("UserAccount with personalId {} already exist.", userAccount.getPersonalId());
 
         } else {
 
