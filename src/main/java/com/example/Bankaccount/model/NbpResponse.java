@@ -2,8 +2,9 @@ package com.example.Bankaccount.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
+
+import java.util.List;
 
 
 @Data
@@ -13,7 +14,7 @@ public class NbpResponse {
     private String currency;
 
     @JsonProperty("rates")
-    private JsonNode rates;
+    private List<Rate> rates;
 
 
 }
