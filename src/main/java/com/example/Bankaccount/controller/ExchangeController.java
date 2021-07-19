@@ -18,8 +18,13 @@ public class ExchangeController {
         this.exchangeService = exchangeService;
     }
 
-    @PostMapping("/transfer")
-    Exchange getNewTransaction(@RequestBody Exchange newTransaction) {
-        return exchangeService.transaction(newTransaction);
+    @PostMapping("/transfer-to-usd")
+    Exchange getPlnTransaction(@RequestBody Exchange newTransaction) {
+        return exchangeService.transactionPln(newTransaction);
+    }
+
+    @PostMapping("/transfer-to-pln")
+    Exchange getUsdTransaction(@RequestBody Exchange newTransaction) {
+        return exchangeService.transactionUsd(newTransaction);
     }
 }
