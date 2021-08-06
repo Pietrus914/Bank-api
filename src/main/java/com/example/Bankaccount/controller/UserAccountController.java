@@ -1,11 +1,15 @@
 package com.example.Bankaccount.controller;
 
 
+import com.example.Bankaccount.model.Account;
 import com.example.Bankaccount.model.UserAccount;
 import com.example.Bankaccount.repository.UserAccountRepository;
 import com.example.Bankaccount.service.UserAccountService;
 import com.example.Bankaccount.exception.PageNotFoundException;
 import com.example.Bankaccount.exception.UserToYoungException;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +28,10 @@ public class UserAccountController {
         this.userAccountService = userAccountService;
     }
 
-
+    @ApiOperation("Operation to list all users accounts")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Powodzenie / Success", response = UserAccount.class),
+            @ApiResponse(code = 400, message = "Błędne żądanie / Bad request", response = Error.class)})
     @GetMapping("/users")
     List<UserAccount> all() {
         return userAccountRepository.findAll();
