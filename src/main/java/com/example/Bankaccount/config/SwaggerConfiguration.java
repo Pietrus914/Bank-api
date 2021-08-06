@@ -29,13 +29,13 @@ public class SwaggerConfiguration {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Some title")
-                .description("Lore ipsum, imsum lore")
+                .title("Bank Api")
+                .description("Create account, transfer money")
                 .license("")
                 .licenseUrl("http://unlicense.org")
                 .termsOfServiceUrl("")
                 .version("1.0")
-                .contact(new Contact("AAA", "BBB", "CCC"))
+                .contact(new Contact("Pietrus914", "https://github.com/Pietrus914", "piotr.wojcik914@gmail.com"))
                 .build();
     }
 }
