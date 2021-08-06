@@ -18,3 +18,7 @@ Technologies used:
 - Spring Boot
 - JPA
 - Junit Test
+
+
+An example of operation can be tested with Swagger:
+http://localhost:8080/swagger-ui/#/
